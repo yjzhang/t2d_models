@@ -2,7 +2,11 @@
 # https://journals.physiology.org/doi/pdf/10.1152/ajpendo.1979.236.6.e667
 # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7917251/
 
-# the first one is the model we should use.
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2769581/ - more recent paper
+
+# 
+# this is the one we are using.
+
 
 import tellurium as te
 

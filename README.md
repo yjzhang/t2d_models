@@ -6,4 +6,7 @@ Tools:
 - tellurium
 - COPASI
 
+Parameter inference:
+???
+
 References: ...
