@@ -50,8 +50,8 @@
   <compartment metaid="metaid_0000003" id="body" name="body" size="1"/>
 </listOfCompartments><listOfSpecies>
   <species metaid="metaid_0000005" id="B" name="beta cell mass" compartment="body" initialConcentration="1000" boundaryCondition="true"/>
-  <species metaid="metaid_0000006" id="I" name="fasting serum insulin " compartment="body" initialConcentration="262440000" boundaryCondition="true"/>
-  <species metaid="metaid_0000007" id="G" name="fasting plasma glucose " compartment="body" initialConcentration="262440001" boundaryCondition="true"/>
+  <species metaid="metaid_0000006" id="I" name="fasting serum insulin " compartment="body" initialConcentration="50" boundaryCondition="true"/>
+  <species metaid="metaid_0000007" id="G" name="fasting plasma glucose " compartment="body" initialConcentration="5" boundaryCondition="true"/>
   <species metaid="metaid_0000008" id="h" name="glucose effect on pancreas" compartment="body" initialConcentration="0" boundaryCondition="true"/>
   <species metaid="metaid_0000010" id="lamda" name="net beta cell growth" compartment="body" initialConcentration="0" boundaryCondition="true"/>
   <species metaid="metaid_0000013" id="gamma" name="insulin resistance" compartment="body" initialConcentration="10000" boundaryCondition="true"/>
