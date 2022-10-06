@@ -190,12 +190,22 @@
       </apply>
     </math>
   </rateRule>
+  <!--TODO: this is messed up -->
   <assignmentRule metaid="metaid_0000067" variable="h">
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
-        <divide/>
+        <apply>
+            <power/>
+            <apply>
+              <divide/>
+              <ci> G </ci>
+              <ci> Gh </ci>
+            </apply>
+            <ci> vh </ci>
+          </apply>
         <apply>
           <plus/>
+          <cn type="integer"> 1 </cn>
           <apply>
             <power/>
             <apply>
@@ -205,16 +215,6 @@
             </apply>
             <ci> vh </ci>
           </apply>
-          <cn type="integer"> 1 </cn>
-        </apply>
-        <apply>
-          <power/>
-          <apply>
-            <divide/>
-            <ci> G </ci>
-            <ci> Gh </ci>
-          </apply>
-          <ci> vh </ci>
         </apply>
       </apply>
     </math>
