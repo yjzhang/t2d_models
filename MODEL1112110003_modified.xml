@@ -57,12 +57,12 @@
   <species metaid="metaid_0000013" id="gamma" name="insulin resistance" compartment="body" initialConcentration="10000" boundaryCondition="true"/>
 </listOfSpecies><listOfParameters>
   <parameter metaid="metaid_0000018" id="B0" name="initial Beta cell mass" value="1000"/>
-  <parameter metaid="metaid_0000019" id="I0" name="insuliemia at t0" value="30"/>
-  <parameter metaid="metaid_0000020" id="G0" name="glycemia at t0" value="4.2"/>
-  <parameter metaid="metaid_0000021" id="Glamda" name="maximal glycemia sensitivity" value="1"/>
-  <parameter metaid="metaid_0000022" id="Tgl" name="liver glucose output" value="1"/>
-  <parameter metaid="metaid_0000023" id="Kxg" name="glucose uptake rate" value="0.001"/>
-  <parameter metaid="metaid_0000024" id="TigB" name="maximal insulin secretion" value="13122" constant="false"/>
+  <parameter metaid="metaid_0000019" id="I0" name="insuliemia at t0" value="50"/>
+  <parameter metaid="metaid_0000020" id="G0" name="glycemia at t0" value="5"/>
+  <parameter metaid="metaid_0000021" id="Glamda" name="maximal glycemia sensitivity" value="5"/>
+  <parameter metaid="metaid_0000022" id="Tgl" name="liver glucose output" value="1" constant="false"/>
+  <parameter metaid="metaid_0000023" id="Kxg" name="glucose uptake rate" value="0.000"/>
+  <parameter metaid="metaid_0000024" id="TigB" name="maximal insulin secretion" value="0.00287" constant="false"/>
   <parameter metaid="metaid_0000025" id="Kxi" name="insulin elimination constant" value="0.05" constant="false"/>
   <parameter metaid="metaid_0000026" id="Kxistart" name="insulin elimination basline" value="0.05"/>
   <parameter metaid="metaid_0000027" id="Kxiend" name="insulin elimination end" value="0.035"/>
@@ -73,14 +73,14 @@
   <parameter metaid="metaid_0000033" id="ImaxB0" name="ImaxB (t0)" value="0.574" constant="false"/>
   <parameter metaid="metaid_0000034" id="lamdamin" name="minimum lamda" value="-0.02"/>
   <parameter metaid="metaid_0000035" id="eta0" name="eta(t0)" value="0.04"/>
-  <parameter metaid="metaid_0000036" id="Teta" name="spontaneous recovery rate" value="1"/>
+  <parameter metaid="metaid_0000036" id="Teta" name="spontaneous recovery rate" value="0.0008"/>
   <parameter metaid="metaid_0000037" id="KetaG" name="glucose toxicity constant" value="0.02"/>
   <parameter metaid="metaid_0000038" id="Gh" name="Gh" value="9"/>
   <parameter metaid="metaid_0000039" id="vh" name="vh" value="4"/>
   <parameter metaid="metaid_0000041" id="A0" name="A0" value="5"/>
   <parameter metaid="metaid_0000042" id="Kag" name="production of HbA1c" value="0.0480808080808081" constant="false"/>
-  <parameter metaid="metaid_0000043" id="Kxa" name="elimination of HbA1c" value="0.1"/>
-  <parameter metaid="metaid_0000044" id="t0" name="starting age" value="18"/>
+  <parameter metaid="metaid_0000043" id="Kxa" name="elimination of HbA1c" value="0.238"/>
+  <parameter metaid="metaid_0000044" id="t0" name="starting age" value="0"/>
   <parameter metaid="metaid_0000045" id="teta10" name="half life of pancreatic reserve" value="1"/>
   <parameter metaid="metaid_0000058" id="tmax" name="tmax" value="90"/>
   <parameter metaid="metaid_0000061" id="X0" name="X0" value="1"/>
@@ -110,6 +110,27 @@
       </apply>
     </math>
   </assignmentRule>
+  <assignmentRule metaid="" variable="Tgl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+            <times/>
+            <apply>
+                <plus/>
+                <apply>
+                    <times/>
+                    <apply>
+                        <times/>
+                        <ci> Kxgi </ci>
+                        <ci> I0 </ci>
+                    </apply>
+                </apply>
+                <ci> Kxg </ci>
+            </apply>
+            <ci> G0 </ci>
+        </apply>
+    </math>
+  </assignmentRule>
+  <!--
   <assignmentRule metaid="metaid_0000068" variable="h0">
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
@@ -139,20 +160,21 @@
       </apply>
     </math>
   </assignmentRule>
+  -->
   <assignmentRule metaid="metaid_0000062" variable="TigB">
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
-        <times/>
-        <apply>
-          <divide/>
+        <divide/>
           <apply>
             <times/>
             <ci> Kxistart </ci>
             <ci> I0 </ci>
           </apply>
+        <apply>
+          <times/>
+          <ci> B0 </ci>
           <ci> h0 </ci>
         </apply>
-        <ci> B0 </ci>
       </apply>
     </math>
   </assignmentRule>
@@ -169,13 +191,13 @@
           <times/>
           <ci> G0 </ci>
           <apply>
+            <divide/>
+            <apply>
             <minus/>
             <cn type="integer"> 100 </cn>
-            <apply>
-              <divide/>
               <ci> A0 </ci>
-              <cn type="integer"> 100 </cn>
             </apply>
+            <cn type="integer"> 100 </cn>
           </apply>
         </apply>
       </apply>
@@ -190,11 +212,11 @@
       </apply>
     </math>
   </rateRule>
-  <!--TODO: this is messed up -->
   <assignmentRule metaid="metaid_0000067" variable="h">
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
-        <apply>
+        <divide/>
+          <apply>
             <power/>
             <apply>
               <divide/>
@@ -243,6 +265,11 @@
           <apply>
             <divide/>
             <apply>
+                <power/>
+                <ci> x </ci>
+                <cn type="integer"> 3 </cn>
+              </apply>
+            <apply>
               <plus/>
               <apply>
                 <power/>
@@ -250,11 +277,6 @@
                 <cn type="integer"> 3 </cn>
               </apply>
               <cn type="integer"> 1 </cn>
-            </apply>
-            <apply>
-              <power/>
-              <ci> x </ci>
-              <cn type="integer"> 3 </cn>
             </apply>
           </apply>
         </apply>
@@ -272,6 +294,7 @@
             <ci> KetaG </ci>
           </apply>
           <ci> eta </ci>
+          <ci> G </ci>
         </apply>
         <ci> Teta </ci>
       </apply>
@@ -289,7 +312,7 @@
   <assignmentRule metaid="metaid_0000064" variable="lamdamax">
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
-        <minus/>
+        <plus/>
         <ci> lamdamin </ci>
         <ci> eta </ci>
       </apply>
@@ -341,18 +364,18 @@
         <apply>
           <times/>
           <apply>
-            <minus/>
+            <divide/>
             <apply>
               <minus/>
               <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+              <ci> t0 </ci>
+              </apply>
               <apply>
-                <divide/>
-                <ci> t0 </ci>
+                <minus/>
                 <ci> tmax </ci>
+                <ci> t0 </ci>
               </apply>
             </apply>
-            <ci> t0 </ci>
-          </apply>
           <apply>
             <minus/>
             <ci> Kxiend </ci>
@@ -362,7 +385,7 @@
       </apply>
     </math>
   </rateRule>
-  <rateRule metaid="metaid_0000071" variable="G">
+  <assignmentRule metaid="metaid_0000071" variable="G">
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
         <divide/>
@@ -374,7 +397,7 @@
         </apply>
       </apply>
     </math>
-  </rateRule>
+  </assignmentRule>
   <rateRule metaid="metaid_0000072" variable="I">
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
