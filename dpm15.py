@@ -1,9 +1,9 @@
 # source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0222833
+import tellurium as te
 
 model_antimony = """
 
 // parameters
-
 t0 = 0;
 tend = 1080;
 Bmax = 4000;
@@ -11,7 +11,7 @@ B0 = 1000;
 vBG = 2;
 GB50 = 9;
 n0 = 0.04;
-kxnG0 = 0.02;
+kXnG0 = 0.02;
 knendprop = 0.4;
 kGG = 0.4;
 Gf0 = 4.2;
@@ -86,11 +86,26 @@ kAG = 0.395;
 
 // Variables
 B = B0;
-kBB;
+kBB = 0;
 n = n0;
 kXnG;
 kn;
 Gf = Gf0;
+GB;
+
+// fast/slow model?
+
+// equations
+kBB := kBBmin + n*(GB^vBG)/(GB50^vBG + GB^vBG);
+kn := knstart*(1 + (t - t0)/(tend - t0)*(knendprop - 1));
+If := psiIgluc/(VI*WkXI);
+psiIgluc = kIBmax*B*(G^vIG)/(GI50^vIG + G^vIG);
+
+// diffeqs
+B' = kBB*B*(1 - B/Bmax) - mu*B;
+n' = -kXnG*Gn*n + kn;
+Gf' = kGG*(Gf24 - Gf);
+
 
 // display names
 B is "beta-cell population size";
@@ -124,5 +139,17 @@ q is "density of glucose amount in tubule with respect to normalized tubule leng
 v is "density of tubular water volume";
 C is "concentration of glucose in pre-urine";
 ur is "rate of urinary glucose loss";
+
+t0 is "starting age for numerical integration of slow model, in months"
+tend is "final age for numerical integration of slow model, in months"
+Bmax is "maximal beta-cell population size"
+B0 is "baseline value of B at slow initial time"
+vBG is "exponent of the Hill function describing replication stimulation by glycemia"
+GB50 is "glycemia of half-maximal beta-cell replication stimulation"
+n0 is "baseline value of n at slow initial stage time"
+kXnG0 is "baseline value of kXnG at t0"
+knendprop is "level of kn at the end of life as proportion of knstart"
+kGG is "rate of convergence of fasting glycemia from start-of-day to end-of-day values"
+Gf0 is "fasting glycemia at age t0"
 
 """
