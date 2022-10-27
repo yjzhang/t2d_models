@@ -10,10 +10,11 @@ Parameter inference:
 ???
 
 Models implemented:
-- Gaetano 2008 - https://pubmed.ncbi.nlm.nih.gov/18780774/, https://www.ebi.ac.uk/biomodels/MODEL1112110003
-- Topp 2000 - https://www.sciencedirect.com/science/article/pii/S0022519300921507
-- Ha 2016 - https://academic.oup.com/endo/article/157/2/624/2422698
+- De Gaetano 2008 - https://pubmed.ncbi.nlm.nih.gov/18780774/, https://www.ebi.ac.uk/biomodels/MODEL1112110003 - I could not get this to work (yet)
+- Topp 2000 - https://www.sciencedirect.com/science/article/pii/S0022519300921507, https://www.ebi.ac.uk/biomodels/BIOMD0000000341 (I didn't use this; I just implemented it myself, with the same results I believe.)
+- Ha 2016 - https://academic.oup.com/endo/article/157/2/624/2422698 - I believe the description in the paper is missing at least one parameter value.
 - Dalla Man 2007 - http://www.ncbi.nlm.nih.gov/pubmed/17926672, https://www.ebi.ac.uk/biomodels/BIOMD0000000379
+- De Gaetano 2019 - https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0222833#pone.0222833.e034 - this is a very complicated model...
 
 List of all BioModels T2D models that can be implemented:
 - https://www.ebi.ac.uk/biomodels/search?offset=0&numResults=50&sort=relevance-desc&query=type+2+diabetes&domain=biomodels
