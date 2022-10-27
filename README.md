@@ -15,6 +15,9 @@ Models implemented:
 - Ha 2016 - https://academic.oup.com/endo/article/157/2/624/2422698
 - Dalla Man 2007 - http://www.ncbi.nlm.nih.gov/pubmed/17926672, https://www.ebi.ac.uk/biomodels/BIOMD0000000379
 
+List of all BioModels T2D models that can be implemented:
+- https://www.ebi.ac.uk/biomodels/search?offset=0&numResults=50&sort=relevance-desc&query=type+2+diabetes&domain=biomodels
+
 References: ...
 - MODEL1112110003_url.xml: Gaetano 2008 (model for diabetes progression) - this does not work as-is. I tried to modify it to make it work; now it compiles, but I think the description of the model in the paper might not be enough to implement it.
 - BIOMD0000000379_url.xml: Dalla Man 2007 (model for meal insulin/glucose dynamics) 
