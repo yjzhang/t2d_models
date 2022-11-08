@@ -8,9 +8,10 @@ G' = R0 - (EG0 + SI*I)*G; // glucose concentration in blood (mg/dL)
 I' = beta*ISR/V - k*I; // insulin concentration in blood
 beta' = ((P - A)*beta)/tau_beta; // beta cell mass - based on workload hypothesis
 // functional compensation - persistent high glucose shifts the glucose response curve to the left
+// gamma is glucose response curve shift by beta cells?
 gam' = (gam_inf - gam)/tau_gam;
 // persistent high glucose increases maximal insulin concentration
-sigma' = (sigma_inf - sigma)/tau_sigma; //sigma is
+sigma' = (sigma_inf - sigma)/tau_sigma; //sigma is beta cell function
 SI' = (S0 - SI)/tau_SI; // insulin sensitivity
 
 // auxiliary functions
@@ -24,11 +25,14 @@ gam_inf := gam_max/(1 + exp(-(G - gam_s)/gam_n)) - gam_0;
 
 // sigma calculation
 sigma_inf := sigma_ISRinf*sigma_Minf + sigma_b;
-sigma_ISRinf := sigma_ISRmax/(1 + sigma_ISRk*exp(-(ISR_sigma - sigma_ISRs)/sigma_ISRn)); #sigma_ISRI
-sigma_Minf := 1 - sigma_Mmax/(1 + sigma_Mk*exp(-(M_sigma - sigma_Ms)/sigma_Mn)); #sigma_MI
-
-M_sigma := (G-G_sigmas)^kM/(alpha_M^kM + (G-G_sigmas)^kM); #M_Gsh
+M_sigma := M_max*(G-G_sigmas)^kM/(alpha_M^kM + (G-G_sigmas)^kM); #M_Gsh
 ISR_sigma := sigma*(M_sigma + gam)^kISR/(alpha_ISR^kISR + (M_sigma + gam)^kISR); #ISR_Gsh
+
+// positive feedback from ISR
+sigma_ISRinf := sigma_ISRmax/(1 + sigma_ISRk*exp(-(ISR_sigma - sigma_ISRs)/sigma_ISRn)); #sigma_ISRI
+
+# negative feedback from M
+sigma_Minf := 1 - sigma_Mmax/(1 + sigma_Mk*exp(-(M_sigma - sigma_Ms)/sigma_Mn)); #sigma_MI
 
 // parameters
 S0 = 0.8;
@@ -44,6 +48,7 @@ tau_beta = 42.85;
 tau_SI = 16.2;
 
 // auxilliary function parameters (based on zdf rats)
+M_max = 1;
 kM = 2;
 alpha_M = 150;
 
@@ -61,7 +66,7 @@ A_b = 0.8;
 
 gam_max = 0.2; #G_bar
 gam_s = 99.9; #Gs
-gam_n = 1; #gn
+gam_n = 1; #Gn
 gam_0 = 0.1; #Gshft
 
 sigma_ISRmax = 867.6; #ISRI_bar
