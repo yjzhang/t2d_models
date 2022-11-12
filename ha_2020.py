@@ -164,7 +164,7 @@ tar_hepasi = 1; tau_hepasi = 360000;
 Gmean' = averG*G/GT;
 G' = HGP + meal_rate + OGTT_rate + IVGTT_rate - (Eg0 + unit_con*si*I)*G;
 I' = beta*ISR/BV  - k*I;  
-b' = (P - A)*beta/tau_b;
+beta' = (P - A)*beta/tau_b;
 gam' = (gam_inf - gam)/tau_g;
 sigma' = (sigma_inf - sigma)/tau_sigma;
 si' = (-si + tar_si)/tau_si;
@@ -178,7 +178,7 @@ N6' = ts*(r3 + rm2*N5 - (rm3 + r2)*N6);
 Gmean = 0
 G = 78.59159991393697  
 I = 5.637556083340107  
-b = 1533.917937647322 
+beta = 1533.917937647322 
 gam = -0.07663502752199285  
 sigma = 1
 si = 0.8 
