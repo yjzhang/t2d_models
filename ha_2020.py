@@ -91,7 +91,7 @@ tau_g = 3081.6;
 sigma_Gsh=35;
 M_Gsh := Mmax*(G-sigma_Gsh)^kM/(alpha_M^kM + (G-sigma_Gsh)^kM);
 
-ISRI_bar = 400; 
+ISRI_bar = 1.4; 
 ISRI_s=0.1; ISRI_n=0.1; ISRI_k=1; sigma_b=0.01752;
 
 sigma_ISRI := ISRI_bar/(1 + ISRI_k*exp(-(ISR - ISRI_s)/ISRI_n));
